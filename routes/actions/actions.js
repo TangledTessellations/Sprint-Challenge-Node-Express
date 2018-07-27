@@ -15,12 +15,11 @@ const INVALID_PROJECT_ID = "INVALID_PROJECT_ID"
 // Checks for project by ID and adds to req.projectIn
 // Use to confirm valid user
 const getProject = async (req, res, next) => {
-    const { id } = req.params
     const { project_id } = req.body
     let error = INVALID_PROJECT_ID
 
     try{
-        const projectIn = await projectModel.get(id || project_id)
+        const projectIn = await projectModel.get(project_id)
         if(!projectIn){ throw Error() }
         error = INTERNAL_SERVER_ERROR
 
@@ -87,7 +86,7 @@ router.post('/', getProject, async (req, res, next) => {
         next({error: error, internalError: err.message})    }
 })
 
-router.put('/:id', getAction, async (req, res, next) => {
+router.put('/:id', getAction, getProject, async (req, res, next) => {
     try{
         const updated = {...req.body}
         await actionModel.update(req.params.id, updated)

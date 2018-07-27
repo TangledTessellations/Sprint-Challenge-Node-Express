@@ -7,7 +7,6 @@ const actionRoutes = require('./actions/actions')
 
 const api = express.Router()
 
-
 api.use('/projects', projectRoutes)
 api.use('/actions', actionRoutes)
 
