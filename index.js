@@ -6,17 +6,14 @@ const actionModel = require('./data/helpers/actionModel.js');
 
 const server = express()
 
-server.get('/', (req, res) => res.send('API running on port 8000'))
-
-server.use('/api', apiRoutes)
-
 server.listen(8000, () => console.log('API running on port 8000'))
 
 
-const SUCCESS = 200;
+
 server.use(express.json())
 server.use(helmet())
 
+const SUCCESS = 200;
 const INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR"
 const INVALID_ACTION_ID = "INVALID_ACTION_ID"
 const MISSING_NAME_DESCRIPTION = "MISSING_NAME_DESCRIPTION"
@@ -24,6 +21,9 @@ const MISSING_DESCRIPTION_NOTES = "MISSING_DESCRIPTION_NOTES"
 const INVALID_PROJECT_ID = "INVALID_PROJECT_ID"
 
 
+server.get('/', (req, res) => res.send('API running on port 8000'))
+
+server.use('/api', apiRoutes)
 
 
 // ******************************  Error Handler ********************************************
