@@ -138,7 +138,7 @@ server.get('/api/actions', async (req, res, next) => {
     let error = INTERNAL_SERVER_ERROR
 
     try{
-        const actions = actionModel.get()
+        const actions = await actionModel.get()
         res.status(SUCCESS).json(actions)
     }catch(err){
         next({error: error, internalError: err.message})    }
